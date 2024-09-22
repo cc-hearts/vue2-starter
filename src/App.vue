@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="visible" ref="testRef" class="text-overflow" @click="handleClick" v-tooltip>
+    <div v-if="visible" ref="testRef" class="text-overflow" v-tooltip>
       {{ $t('confirm') }}
     </div>
 
@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// import { useTooltip } from "./use-tooltip";
 export default {
   name: 'App',
   data() {
@@ -18,9 +17,6 @@ export default {
     }
   },
   methods: {
-    handleClick() {
-      // useTooltip( this.$refs.testRef)
-    },
     handleToggle() {
       this.visible = !this.visible
     }
