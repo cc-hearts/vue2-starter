@@ -1,5 +1,5 @@
-const rspack = require('@rspack/core');
-const { VueLoaderPlugin } = require('vue-loader');
+const rspack = require('@rspack/core')
+const { VueLoaderPlugin } = require('vue-loader')
 
 /** @type {import('@rspack/cli').Configuration} */
 const config = {
@@ -19,6 +19,9 @@ const config = {
   ],
   resolve: {
     extensions: ['.vue', '.ts', '...'],
+    alias: {
+      vue$: 'vue/dist/vue.esm.js',
+    },
   },
   module: {
     rules: [
@@ -58,5 +61,5 @@ const config = {
   experiments: {
     css: false,
   },
-};
-module.exports = config;
+}
+module.exports = config

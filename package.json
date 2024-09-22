@@ -1,11 +1,12 @@
 {
   "name": "vue2",
   "version": "0.0.1",
-	"author": "Carl Chen",
+  "author": "Carl Chen",
   "license": "MIT",
   "scripts": {
     "build": "rspack build",
-    "dev": "rspack serve"
+    "dev": "rspack serve",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "devDependencies": {
     "@rspack/cli": "^1.0.3",
@@ -22,11 +23,12 @@
     "vue-style-loader": "^4.1.3",
     "vue-template-compiler": "^2.7.16",
     "vuex": "^3.6.2",
-    "vue-i18n": "8"
+    "vue-i18n": "8",
+    "prettier": "^3.2.2"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-	] 
+  ]
 }
