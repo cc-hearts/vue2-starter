@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="visible" ref="testRef" class="text-overflow" v-tooltip>
+    <div v-if="visible" class="text-overflow" v-tooltip tooltip-content="content">
       {{ $t('confirm') }}
     </div>
 
@@ -13,13 +13,14 @@ export default {
   name: 'App',
   data() {
     return {
-      visible: true
+      visible: true,
     }
   },
   methods: {
     handleToggle() {
       this.visible = !this.visible
-    }
+    },
+
   }
 };
 </script>

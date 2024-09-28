@@ -1,4 +1,4 @@
-import { getPadding } from "@/utils/dom"
+import { getPadding } from "../utils/dom"
 
 export function useOverflowHidden(target: HTMLElement) {
   const range = document.createRange()

@@ -1,40 +1,51 @@
 <template>
-  <el-tooltip content="content" ref="triggerRef" :manual="true">
-    {{ getEl() }}
+  <el-tooltip ref="triggerRef" :manual="true">
+    <template #content>
+      {{ internalContent }}
+    </template>
   </el-tooltip>
 </template>
 
 <script>
 import { useOverflowHidden } from '../../composables/use-overflow-hidden.ts'
 export default {
-  name: 'Test',
+  name: 'ToolTipWrapper',
+  props: {
+    getEl: {
+      type: Function,
+      default: () => null
+    },
+    getContent: {
+      type: Function,
+      default: () => ''
+    }
+  },
   data() {
     return {
-      getEl: () => null,
-      value: false,
+      internalContent: '',
+      isHover: false,
     }
   },
   mounted() {
     const el = this.getEl()
     if (!el) return
 
-    this.$refs.triggerRef.referenceElm = this.$refs.triggerRef.$el = el;
+    this.$refs.triggerRef.referenceElm = el;
 
     el.addEventListener('mousemove', this.onMouseEnter, false)
     el.addEventListener('mouseleave', this.onMouseLeave, false)
   },
   methods: {
     onMouseEnter() {
-      if (!this.value && useOverflowHidden(this.getEl())) {
-        this.value = true
+      if (!this.isHover && useOverflowHidden(this.getEl())) {
+        this.internalContent = this.getContent()
+        this.isHover = true
         this.$refs.triggerRef.showPopper = true
       }
     },
     onMouseLeave() {
-      if (this.value) {
-        this.value = false;
-        this.$refs.triggerRef.showPopper = false
-      }
+      this.isHover = false;
+      this.$refs.triggerRef.showPopper = false
     },
     onDestroy() {
       const el = this.getEl()

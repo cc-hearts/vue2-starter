@@ -1,12 +1,12 @@
 import { TooltipWrapper } from '../components/index'
 import Vue from 'vue'
-function createTooltipFactory(el: HTMLElement) {
+
+function createTooltipFactory(el: HTMLElement, getContent: () => string) {
   const Ctor = Vue.extend(TooltipWrapper)
   const instance = new Ctor({
-    data() {
-      return {
-        getEl: () => el,
-      }
+    propsData: {
+      getContent,
+      getEl: () => el,
     },
   })
 
@@ -17,8 +17,8 @@ function createTooltipFactory(el: HTMLElement) {
 export function setupDirection() {
   const tooltipSymbol = Symbol('tooltip')
   Vue.directive('tooltip', {
-    bind(el) {
-      const instance = createTooltipFactory(el)
+    bind(el: HTMLElement) {
+      const instance = createTooltipFactory(el, () => el.getAttribute('tooltip-content') || '')
       Reflect.set(el, tooltipSymbol, instance)
     },
     unbind(el) {
