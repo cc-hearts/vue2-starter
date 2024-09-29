@@ -1,5 +1,6 @@
 const rspack = require('@rspack/core')
 const { VueLoaderPlugin } = require('vue-loader')
+const path = require('path')
 
 /** @type {import('@rspack/cli').Configuration} */
 const config = {
@@ -21,6 +22,7 @@ const config = {
     extensions: ['.vue', '.ts', '...'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
+      "@": path.resolve(__dirname, './src'),
     },
   },
   module: {
