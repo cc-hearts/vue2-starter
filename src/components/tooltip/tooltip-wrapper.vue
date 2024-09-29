@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { useOverflowHidden } from '../../composables/use-overflow-hidden.ts'
+import { useOverflowHidden } from '@/composables/use-overflow-hidden.ts'
 export default {
   name: 'ToolTipWrapper',
   props: {
