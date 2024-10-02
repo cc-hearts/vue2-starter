@@ -3,33 +3,37 @@ import { TooltipWrapper } from '@/components'
 import { setupVTooltipDirection } from '@/directions/v-tooltip'
 import * as ElementUI from 'element-ui'
 
-const localVue = createLocalVue();
-localVue.use(ElementUI);
+const localVue = createLocalVue()
+localVue.use(ElementUI)
 setupVTooltipDirection(localVue)
 
-
 describe('TooltipWrapper components', () => {
-  const tooltipWrapperDestroy = (wrapper: ReturnType<typeof mount<typeof TooltipWrapper>>) => {
+  const tooltipWrapperDestroy = (
+    wrapper: ReturnType<typeof mount<typeof TooltipWrapper>>,
+  ) => {
     wrapper.vm.onDestroy()
     wrapper.destroy()
   }
 
   const createMockGetBoundingClientRectFactory = (width: number) => {
-    return () => ({
-      width,
-      height: 0,
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    } as DOMRect)
+    return () =>
+      ({
+        width,
+        height: 0,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      }) as DOMRect
   }
 
   const triggerMouseMove = (el: Element) => {
-    el.dispatchEvent(new MouseEvent('mousemove', {
-      bubbles: true,
-      cancelable: true,
-    }))
+    el.dispatchEvent(
+      new MouseEvent('mousemove', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
   }
 
   test('renders a tooltip', (done) => {
@@ -40,12 +44,13 @@ describe('TooltipWrapper components', () => {
       localVue,
       propsData: {
         getContent: () => 'foo baz',
-        getEl: () => el
-      }
+        getEl: () => el,
+      },
     })
     const _getBoundingClientRect = Range.prototype.getBoundingClientRect
 
-    Range.prototype.getBoundingClientRect = createMockGetBoundingClientRectFactory(1)
+    Range.prototype.getBoundingClientRect =
+      createMockGetBoundingClientRectFactory(1)
 
     expect(document.querySelector('.el-tooltip__popper')).toBeNull()
 
@@ -75,13 +80,14 @@ describe('TooltipWrapper components', () => {
       localVue,
       propsData: {
         getContent: () => 'foo baz1',
-        getEl: () => el
-      }
+        getEl: () => el,
+      },
     })
 
     const _getBoundingClientRect = Range.prototype.getBoundingClientRect
 
-    Range.prototype.getBoundingClientRect = createMockGetBoundingClientRectFactory(100)
+    Range.prototype.getBoundingClientRect =
+      createMockGetBoundingClientRectFactory(100)
 
     triggerMouseMove(el)
 
@@ -101,16 +107,17 @@ describe('TooltipWrapper components', () => {
         <div v-tooltip style="width:10px;overflow:hidden;">
           <span>foo bar</span>
         </div>
-      `
+      `,
     })
 
     const wrapper = mount(Comp, {
-      localVue
+      localVue,
     })
 
     const el = wrapper.vm.$el
     el.getBoundingClientRect = createMockGetBoundingClientRectFactory(10)
-    Range.prototype.getBoundingClientRect = createMockGetBoundingClientRectFactory(20)
+    Range.prototype.getBoundingClientRect =
+      createMockGetBoundingClientRectFactory(20)
 
     triggerMouseMove(el)
 

@@ -1,5 +1,3 @@
-
-
 export function getPadding(el: HTMLElement) {
   const parseInt = (target: string) => Number.parseInt(target) || 0
 

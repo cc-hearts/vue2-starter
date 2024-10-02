@@ -1,4 +1,4 @@
-import { getPadding } from "../utils/dom"
+import { getPadding } from '../utils/dom'
 
 export function useOverflowHidden(target: HTMLElement) {
   const range = document.createRange()
@@ -10,8 +10,12 @@ export function useOverflowHidden(target: HTMLElement) {
   const { width, height } = target.getBoundingClientRect()
 
   const { left, top, bottom, right } = getPadding(target)
-  const verPadding = top + bottom;
-  const horPadding = left + right;
+  const verPadding = top + bottom
+  const horPadding = left + right
 
-  return rangeHeight + verPadding > height || rangeWidth + horPadding > width || target.scrollWidth > target.clientWidth
+  return (
+    rangeHeight + verPadding > height ||
+    rangeWidth + horPadding > width ||
+    target.scrollWidth > target.clientWidth
+  )
 }
