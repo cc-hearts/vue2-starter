@@ -5,11 +5,11 @@ import store from './store/index'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import i18n from './language/index'
-import { setupDirection } from './directions/v-tooltip.ts'
+import { setupVTooltipDirection } from './directions/v-tooltip.ts'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-setupDirection()
+setupVTooltipDirection(Vue)
 
 new Vue({
   // @ts-ignore

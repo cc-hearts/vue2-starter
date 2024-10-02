@@ -7,13 +7,13 @@ module.exports = {
   ],
   testEnvironment: 'jsdom',
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
-  "transform": {
+  transform: {
     // 用 `vue-jest` 处理 `*.vue` 文件
     ".*\\.(vue)$": "vue-jest",
     ".*\\.(js)$": "babel-jest",
     "^.+\.tsx?$": "ts-jest",
   },
-  "moduleNameMapper": {
+  moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1"
   }
 }
