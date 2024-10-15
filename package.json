@@ -10,7 +10,6 @@
     "test": "jest",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "test-router": "bun scripts/transform-page-router/index.ts"
-    
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -44,5 +43,8 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "dependencies": {
+    "@types/node": "^22.7.5"
+  }
 }
