@@ -47,11 +47,12 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
     if (router === '/index') {
       router = '/'
     }
+
     parentRouterList.push({
       path: router,
       component: `() => import('${relative(process.cwd(), resolve(path, fileDir.name))
         .replaceAll("\\", "/")
-        .replace(/src/, "@")
+        .replace(/^src/gm, "@")
         }')`
     })
 
