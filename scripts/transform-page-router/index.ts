@@ -4,6 +4,9 @@ import { resolve, relative, extname } from 'path'
 import { inspect } from 'util'
 
 const ROOT_PATH = resolve(process.cwd(), "src/pages")
+
+const DEFAULT_FILE_NAME = 'index.vue'
+
 interface Router {
   path: string,
   component?: string
@@ -18,6 +21,10 @@ const formatRouterPath = (path: string) => {
 
 const isVueFile = (fileName: string) => {
   return extname(fileName) === '.vue'
+}
+
+const fileRemoveExt = (parentPath: string, filename: string) => {
+  return formatRouterPath(parentPath + filename.split('.').slice(0, -1).join('.'))
 }
 
 export const readRouterDir = async (path: string, parentRouterList: Router[] = [], parentPath = '') => {
@@ -36,7 +43,10 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
 
 
   fileList.forEach(fileDir => {
-    const router = formatRouterPath(parentPath + fileDir.name.split('.').slice(0, -1).join('.'))
+    let router = fileRemoveExt(parentPath, fileDir.name)
+    if (router === '/index') {
+      router = '/'
+    }
     parentRouterList.push({
       path: router,
       component: `() => import('${relative(process.cwd(), resolve(path, fileDir.name))
@@ -64,7 +74,7 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
 
     currentRouter.children = [...(currentRouter.children || []), ...children];
     if (!currentRouter.component) {
-      const index = currentRouter.children.findIndex(target => target.path === 'index')
+      const index = currentRouter.children.findIndex(target => target.path === DEFAULT_FILE_NAME.replace(".vue", ""))
       if (index > -1) {
         const [target] = currentRouter.children.splice(index, 1)
         currentRouter.component = target?.component

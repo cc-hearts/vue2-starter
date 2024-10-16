@@ -1,7 +1,18 @@
 export default [
   {
-    "path": "/index",
+    "path": "/",
     "component": () => import('@/pages/index.vue')
+  },
+  {
+    "path": "/foo",
+    "children": [
+      {
+        "path": "baz",
+        "children": [],
+        "component": () => import('@/pages/foo/baz/index.vue')
+      }
+    ],
+    "component": () => import('@/pages/foo/index.vue')
   },
   {
     "path": "/tooltip",
