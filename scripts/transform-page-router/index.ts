@@ -4,7 +4,6 @@ import { resolve, relative, extname } from 'path'
 import { inspect } from 'util'
 
 const ROOT_PATH = resolve(process.cwd(), "src/pages")
-
 const DEFAULT_FILE_NAME = 'index.vue'
 
 interface Router {
@@ -40,8 +39,6 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
     }
   })
 
-
-
   fileList.forEach(fileDir => {
     let router = fileRemoveExt(parentPath, fileDir.name)
     if (router === '/index') {
@@ -57,7 +54,6 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
     })
 
   })
-
 
   const fns = floderList.map(async floder => {
     let currentRouter: Router | undefined = parentRouterList.find(target => target.path === `/${floder.name}`)
@@ -91,7 +87,6 @@ await readRouterDir(ROOT_PATH, rootRouterTree, '/')
 if (process.env.NODE_ENV !== 'production') {
   console.log(inspect(rootRouterTree, false, null, true))
 }
-
 
 const routerCtx = JSON.stringify(rootRouterTree, null, 2)
   .replaceAll(/\"\(\) => import\((.*?)\)\"/g, '() => import($1)')
