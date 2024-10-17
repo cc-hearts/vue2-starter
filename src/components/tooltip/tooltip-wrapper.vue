@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { useOverflowHidden } from '@/composables/use-overflow-hidden.ts'
+import { isHidden } from '@cc-heart/utils-client'
 
 export default {
   name: 'ToolTipWrapper',
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     onMouseEnter() {
-      if (!this.isHover && useOverflowHidden(this.getEl())) {
+      if (!this.isHover && isHidden(this.getEl())) {
         this.internalContent = this.getContent()
         this.isHover = true
         this.$refs.triggerRef.showPopper = true

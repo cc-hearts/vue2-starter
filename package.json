@@ -14,6 +14,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
+    "@cc-heart/utils-client": "^2.0.7",
     "@rspack/cli": "^1.0.3",
     "@rspack/core": "^1.0.3",
     "@types/jest": "^29.5.13",
