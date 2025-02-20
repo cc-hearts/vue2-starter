@@ -17,6 +17,9 @@ const config = {
     new rspack.HtmlRspackPlugin({
       template: './index.html',
     }),
+    new rspack.DefinePlugin({
+      IS_DEV: process.env.NODE_ENV === 'development',
+    }),
   ],
   resolve: {
     extensions: ['.vue', '.ts', '...'],
