@@ -3,19 +3,18 @@ import { readdir, writeFile } from 'fs/promises'
 import { resolve, relative, extname } from 'path'
 import { inspect } from 'util'
 
-const ROOT_PATH = resolve(process.cwd(), "src/pages")
+const ROOT_PATH = resolve(process.cwd(), 'src/pages')
 const DEFAULT_FILE_NAME = 'index.vue'
 
 interface Router {
-  path: string,
+  path: string
   component?: string
   redirect?: string
   children?: Router[]
 }
 
 const formatRouterPath = (path: string) => {
-  return path.replaceAll("\\", "/")
-    .replace(/\[(.*?)\]/, ":$1")
+  return path.replaceAll('\\', '/').replace(/\[(.*?)\]/, ':$1')
 }
 
 const isVueFile = (fileName: string) => {
@@ -23,15 +22,21 @@ const isVueFile = (fileName: string) => {
 }
 
 const fileRemoveExt = (parentPath: string, filename: string) => {
-  return formatRouterPath(parentPath + filename.split('.').slice(0, -1).join('.'))
+  return formatRouterPath(
+    parentPath + filename.split('.').slice(0, -1).join('.'),
+  )
 }
 
-export const readRouterDir = async (path: string, parentRouterList: Router[] = [], parentPath = '') => {
+export const readRouterDir = async (
+  path: string,
+  parentRouterList: Router[] = [],
+  parentPath = '',
+) => {
   const dirs = await readdir(path, { withFileTypes: true })
   const fileList: Dirent[] = []
   const floderList: Dirent[] = []
 
-  dirs.forEach(dir => {
+  dirs.forEach((dir) => {
     if (dir.isDirectory()) {
       floderList.push(dir)
     } else if (isVueFile(dir.name)) {
@@ -39,7 +44,7 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
     }
   })
 
-  fileList.forEach(fileDir => {
+  fileList.forEach((fileDir) => {
     let router = fileRemoveExt(parentPath, fileDir.name)
     if (router === '/index') {
       router = '/'
@@ -47,16 +52,19 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
 
     parentRouterList.push({
       path: router,
-      component: `() => import('${relative(process.cwd(), resolve(path, fileDir.name))
-        .replaceAll("\\", "/")
-        .replace(/^src/gm, "@")
-        }')`
+      component: `() => import('${relative(
+        process.cwd(),
+        resolve(path, fileDir.name),
+      )
+        .replaceAll('\\', '/')
+        .replace(/^src/gm, '@')}')`,
     })
-
   })
 
-  const fns = floderList.map(async floder => {
-    let currentRouter: Router | undefined = parentRouterList.find(target => target.path === `/${floder.name}`)
+  const fns = floderList.map(async (floder) => {
+    let currentRouter: Router | undefined = parentRouterList.find(
+      (target) => target.path === `/${floder.name}`,
+    )
 
     if (!currentRouter) {
       const router = formatRouterPath(`${parentPath}${floder.name}`)
@@ -69,9 +77,11 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
     const children: Router[] = []
     await readRouterDir(resolve(path, floder.name), children)
 
-    currentRouter.children = [...(currentRouter.children || []), ...children];
+    currentRouter.children = [...(currentRouter.children || []), ...children]
     if (!currentRouter.component) {
-      const index = currentRouter.children.findIndex(target => target.path === DEFAULT_FILE_NAME.replace(".vue", ""))
+      const index = currentRouter.children.findIndex(
+        (target) => target.path === DEFAULT_FILE_NAME.replace('.vue', ''),
+      )
       if (index > -1) {
         const [target] = currentRouter.children.splice(index, 1)
         currentRouter.component = target?.component
@@ -80,16 +90,20 @@ export const readRouterDir = async (path: string, parentRouterList: Router[] = [
   })
   return Promise.all(fns)
 }
+;(async () => {
+  const rootRouterTree: Array<any> = []
+  await readRouterDir(ROOT_PATH, rootRouterTree, '/')
 
-const rootRouterTree = []
-await readRouterDir(ROOT_PATH, rootRouterTree, '/')
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(inspect(rootRouterTree, false, null, true))
+  }
 
-if (process.env.NODE_ENV !== 'production') {
-  console.log(inspect(rootRouterTree, false, null, true))
-}
-
-const routerCtx = JSON.stringify(rootRouterTree, null, 2)
-  .replaceAll(/\"\(\) => import\((.*?)\)\"/g, '() => import($1)')
-await writeFile(resolve(process.cwd(), "src/router/auto-router.ts"), 'export default ' + routerCtx)
-
-
+  const routerCtx = JSON.stringify(rootRouterTree, null, 2).replaceAll(
+    /"\(\) => import\((.*?)\)"/g,
+    '() => import($1)',
+  )
+  await writeFile(
+    resolve(process.cwd(), 'src/router/auto-router.ts'),
+    'export default ' + routerCtx,
+  )
+})()

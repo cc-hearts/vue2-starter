@@ -1,11 +1,3 @@
-<template>
-  <el-tooltip ref="triggerRef" :manual="true">
-    <template #content>
-      {{ internalContent }}
-    </template>
-  </el-tooltip>
-</template>
-
 <script>
 import { isHidden } from '@cc-heart/utils-client'
 
@@ -59,3 +51,11 @@ export default {
 }
 
 </script>
+
+<template>
+  <el-tooltip ref="triggerRef" :manual="true">
+    <template #content>
+      {{ internalContent }}
+    </template>
+  </el-tooltip>
+</template>

@@ -17,5 +17,11 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "global.d.ts", "__tests__"]
+  "include": [
+    "src",
+    "scripts/**/*.ts",
+    "eslint.config.mts",
+    "global.d.ts",
+    "__tests__"
+  ]
 }

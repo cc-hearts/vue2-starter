@@ -1,10 +1,9 @@
+<script>
+export default {
+  name: 'RoleModuleIndex',
+}
+</script>
+
 <template>
   <div>123</div>
 </template>
-
-
-<script>
-export default {
-  name: "RoleModule.Index"
-}
-</script>

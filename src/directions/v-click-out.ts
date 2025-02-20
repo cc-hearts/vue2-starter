@@ -1,6 +1,5 @@
-
 import { isFn } from '@cc-heart/utils'
-import Vue from 'vue'
+import type Vue from 'vue'
 
 export function setupVClickOutDirection(vue: typeof Vue) {
   const clickOutSymbol = Symbol('clickOut')

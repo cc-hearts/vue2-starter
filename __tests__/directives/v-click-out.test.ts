@@ -1,11 +1,11 @@
-import { createLocalVue } from "@vue/test-utils";
-import { setupVClickOutDirection } from "@/directions/v-click-out";
-import { mount } from "@vue/test-utils";
+import { createLocalVue } from '@vue/test-utils'
+import { setupVClickOutDirection } from '@/directions/v-click-out'
+import { mount } from '@vue/test-utils'
 
 const localVue = createLocalVue()
 setupVClickOutDirection(localVue)
 
-describe("v-click-out", () => {
+describe('v-click-out', () => {
   test('use vClickOut', async () => {
     const fn = jest.fn()
     const Comp = localVue.component('Comp', {
@@ -18,12 +18,12 @@ describe("v-click-out", () => {
       methods: {
         handlerClickOut() {
           fn()
-        }
-      }
+        },
+      },
     })
 
     const wrapper = mount(Comp, {
-      localVue
+      localVue,
     })
 
     await wrapper.find('#id1').trigger('click')

@@ -1,5 +1,5 @@
 import { TooltipWrapper } from '../components/index'
-import Vue from 'vue'
+import type Vue from 'vue'
 
 function createTooltipFactory(
   el: HTMLElement,

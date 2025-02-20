@@ -1,18 +1,14 @@
-<template>
-  <div>
-    {{ id }} home
-  </div>
-
-</template>
-
 <script>
-
 export default {
-  name: 'User.Id',
+  name: 'UserPage',
   computed: {
     id() {
       return this.$route.params.id
-    }
-  }
+    },
+  },
 }
 </script>
+
+<template>
+  <div>{{ id }} home</div>
+</template>

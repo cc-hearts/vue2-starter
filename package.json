@@ -9,23 +9,28 @@
     "test:coverage": "jest --coverage",
     "test": "jest",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "eslint": "eslint --fix .",
     "test-router": "bun scripts/transform-page-router/index.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
+    "@cc-heart/eslint-config": "^3.0.6",
     "@cc-heart/utils-client": "^2.0.9",
     "@rspack/cli": "^1.1.0",
     "@rspack/core": "^1.1.0",
     "@types/jest": "^29.5.14",
+    "@types/node": "^22.9.0",
     "@vue/server-test-utils": "1",
     "@vue/test-utils": "1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^29.7.0",
     "css-loader": "^6.11.0",
     "element-ui": "^2.15.14",
+    "eslint": "^9.20.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "jiti": "^2.4.2",
     "msw": "^2.7.0",
     "prettier": "^3.3.3",
     "sass": "^1.80.6",
@@ -47,8 +52,7 @@
     "not dead"
   ],
   "dependencies": {
-    "@cc-heart/utils": "^5.3.1",
-    "@types/node": "^22.9.0"
+    "@cc-heart/utils": "^5.3.1"
   },
   "msw": {
     "workerDirectory": [
@@ -56,4 +60,3 @@
     ]
   }
 }
-

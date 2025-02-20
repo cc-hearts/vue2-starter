@@ -1,16 +1,6 @@
-<template>
-  <div>
-    <div v-if="visible" class="text-overflow" v-tooltip tooltip-content="content">
-      {{ $t('confirm') }}
-    </div>
-
-    <button @click="handleToggle">toogle visible</button>
-  </div>
-</template>
-
 <script>
 export default {
-  name: 'Tooltip.Home',
+  name: 'TooltipHome',
   data() {
     return {
       visible: true,
@@ -20,10 +10,26 @@ export default {
     handleToggle() {
       this.visible = !this.visible
     },
-
-  }
-};
+  },
+}
 </script>
+
+<template>
+  <div>
+    <div
+      v-if="visible"
+      v-tooltip
+      class="text-overflow"
+      tooltip-content="content"
+    >
+      {{ $t('confirm') }}
+    </div>
+
+    <button @click="handleToggle">
+      toogle visible
+    </button>
+  </div>
+</template>
 
 <style>
 .text-overflow {
