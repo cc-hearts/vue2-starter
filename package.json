@@ -16,6 +16,7 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@cc-heart/eslint-config": "^3.0.6",
+    "@cc-heart/utils": "^5.3.1",
     "@cc-heart/utils-client": "^2.0.9",
     "@rspack/cli": "^1.1.0",
     "@rspack/core": "^1.1.0",
@@ -51,9 +52,6 @@
     "last 2 versions",
     "not dead"
   ],
-  "dependencies": {
-    "@cc-heart/utils": "^5.3.1"
-  },
   "msw": {
     "workerDirectory": [
       "public"
