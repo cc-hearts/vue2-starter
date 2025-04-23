@@ -1,6 +1,10 @@
+<template>
+  <div class="p-4">home page</div>
+</template>
+
 <script>
 export default {
-  name: 'HomePage'
+  name: 'HomePage',
 }
 </script>
 
