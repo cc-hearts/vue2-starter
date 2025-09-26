@@ -20,6 +20,11 @@ export default [
     component: () => import('@/pages/tooltip/index.vue'),
   },
   {
+    path: '/progress-demo',
+    children: [],
+    component: () => import('@/pages/progress-demo/index.vue'),
+  },
+  {
     path: '/user',
     children: [
       {
