@@ -1,42 +1,47 @@
 export default [
   {
-    path: '/',
-    component: () => import('@/pages/index.vue'),
+    "path": "/",
+    "component": () => import('@/pages/index.vue')
   },
   {
-    path: '/foo',
-    children: [
+    "path": "/tooltip",
+    "children": [],
+    "component": () => import('@/pages/tooltip/index.vue')
+  },
+  {
+    "path": "/progress-demo",
+    "children": [],
+    "component": () => import('@/pages/progress-demo/index.vue')
+  },
+  {
+    "path": "/user",
+    "children": [
       {
-        path: 'baz',
-        children: [],
-        component: () => import('@/pages/foo/baz/index.vue'),
-      },
+        "path": ":id",
+        "component": () => import('@/pages/user/[id].vue')
+      }
     ],
-    component: () => import('@/pages/foo/index.vue'),
+    "component": () => import('@/pages/user/index.vue')
   },
   {
-    path: '/tooltip',
-    children: [],
-    component: () => import('@/pages/tooltip/index.vue'),
-  },
-  {
-    path: '/progress-demo',
-    children: [],
-    component: () => import('@/pages/progress-demo/index.vue'),
-  },
-  {
-    path: '/user',
-    children: [
+    "path": "/foo",
+    "children": [
       {
-        path: ':id',
-        component: () => import('@/pages/user/[id].vue'),
-      },
+        "path": "baz",
+        "children": [],
+        "component": () => import('@/pages/foo/baz/index.vue')
+      }
     ],
-    component: () => import('@/pages/user/index.vue'),
+    "component": () => import('@/pages/foo/index.vue')
   },
   {
-    path: '/:role',
-    children: [],
-    component: () => import('@/pages/[role]/index.vue'),
+    "path": "/modal-function",
+    "children": [],
+    "component": () => import('@/pages/modal-function/index.vue')
+  },
+  {
+    "path": "/:role",
+    "children": [],
+    "component": () => import('@/pages/[role]/index.vue')
   },
 ]
