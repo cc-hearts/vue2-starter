@@ -10,7 +10,8 @@
     "test": "jest",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "eslint": "eslint --fix .",
-    "test-router": "bun scripts/transform-page-router/index.ts"
+    "test-router": "node --experimental-strip-types scripts/transform-page-router/index.ts",
+    "generate:index": "node --experimental-strip-types scripts/generate-index-links/index.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

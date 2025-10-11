@@ -1,6 +1,18 @@
 <script>
 export default {
   name: 'HomePage',
+  data() {
+    return {
+      routes: [
+        '/foo',
+        '/foo/baz',
+        '/modal-function',
+        '/progress-demo',
+        '/tooltip',
+        '/user',
+      ],
+    }
+  },
 }
 </script>
 
@@ -10,14 +22,9 @@ export default {
     <div class="navigation">
       <h2>演示页面</h2>
       <ul>
-        <li>
-          <router-link to="/tooltip">
-            Tooltip 演示
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/progress-demo">
-            进度条演示
+        <li v-for="route in routes" :key="route">
+          <router-link :to="route">
+            {{ route }}
           </router-link>
         </li>
       </ul>
