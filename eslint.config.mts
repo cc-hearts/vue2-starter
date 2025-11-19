@@ -18,4 +18,8 @@ export default [
       project: [_resolve('tsconfig.json')],
     },
   }),
+
+  {
+    'vue/no-deprecated-destroyed-lifecycle': 'off'
+  }
 ]
