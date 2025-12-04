@@ -20,7 +20,6 @@ export default {
   <div class="p-4">
     <h1>Vue2 Starter</h1>
     <div class="navigation">
-      <h2>演示页面</h2>
       <ul>
         <li v-for="route in routes" :key="route">
           <router-link :to="route">
