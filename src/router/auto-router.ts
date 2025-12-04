@@ -25,11 +25,6 @@ export default [
     "component": () => import('@/pages/progress-demo/index.vue')
   },
   {
-    "path": "/text-hidden",
-    "children": [],
-    "component": () => import('@/pages/text-hidden/index.vue')
-  },
-  {
     "path": "/tooltip",
     "children": [],
     "component": () => import('@/pages/tooltip/index.vue')
